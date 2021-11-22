@@ -51,7 +51,6 @@ router.put('/:id', (req, res) => {
   Tag.findByPk(req.params.id, {
     include: [{ model: Product, through: ProductTag, as: 'products' }]
   }).then((tags) => {
-
     // get all the product ids 
     const productIds = tags.products.map(product => product.id);
 
@@ -62,10 +61,8 @@ router.put('/:id', (req, res) => {
         tag_id: req.params.id
       }
     })
-
   }).then(result => {
     // insert the new sets of tag ids
-
     // prepare an array of 
     // {product_id, tag_id}
     const payload = req.body.productIds.map(productId => {
